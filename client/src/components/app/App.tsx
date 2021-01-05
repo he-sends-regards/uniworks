@@ -13,6 +13,7 @@ import Preloader from '../preloader/preloader';
 import './App.css';
 import Works from '../works/works';
 import Rules from '../rules/rules';
+import Form from '../form/form';
 
 const App: React.FC = () => {
 	const [isLoaded, setIsLoaded] = useState(false);
@@ -29,6 +30,9 @@ const App: React.FC = () => {
 				<Router>
 					<HeaderNavigation />
 					<Switch>
+						<Route path="/auth/:formType" exact>
+							<Form />
+						</Route>
 						<Route path="/about" exact>
 							<About />
 						</Route>
