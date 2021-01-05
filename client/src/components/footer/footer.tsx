@@ -1,6 +1,4 @@
 import React from 'react';
-import { Link, Redirect, useLocation } from 'react-router-dom';
-import { createBrowserHistory } from 'history';
 import './style.css';
 import telegramLogo from './img/telegram.svg';
 import instLogo from './img/instagram.svg';
@@ -12,7 +10,15 @@ const Footer = () => {
 	return (
 		<footer className="page-footer purple darken-2">
 			<div className="container">
-				<div className="row" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+				<div
+					className="row"
+					style={{
+						display: 'flex',
+						alignItems: 'center',
+						justifyContent: 'space-between',
+						margin: '0'
+					}}
+				>
 					<div className="col l6 s12">
 						<h5 className="white-text">
 							<img src={logo} width="90" />
@@ -66,10 +72,7 @@ const Footer = () => {
 			</div>
 			<div className="footer-copyright">
 				<div className="container" style={{ textAlign: 'center' }}>
-					© 2020 UniWorks
-					{/* <a className="grey-text text-lighten-4 right" href="#!">
-						More Links
-					</a> */}
+					Copyright © 2020 UniWorks. All rights are reserved
 				</div>
 			</div>
 		</footer>
