@@ -1,73 +1,59 @@
 import React from 'react';
+import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 
-const Form = () => {
+import './style/style.css';
+
+const inputFields = [
+	{
+		id: 'email',
+		type: 'email',
+		placeholder: 'Email'
+	},
+	{
+		id: 'password',
+		type: 'password',
+		placeholder: 'Password'
+	}
+];
+
+type PersonScore = {
+	email: string;
+	password: string;
+};
+
+const Form: React.FC = () => {
+	const { register, handleSubmit } = useForm<PersonScore>();
 	let { formType }: any = ({} = useParams());
 
+	const onSubmit = (data: PersonScore) => {
+		console.log('data', data);
+	};
+
 	return (
-		<div
-			className="row"
-			style={{
-				width: '40%',
-				fontFamily: 'Montserrat, sans-serif',
-				fontWeight: 200,
-				fontStyle: 'italic',
-				boxShadow: '0 0 15px black',
-				borderRadius: '15px',
-				// display: 'flex',
-				// alignItems: 'center',
-				// justifyContent: 'center',
-				color: 'white'
-			}}
-		>
-			<form
-				className="col s12 l12"
-				style={{
-					backgroundColor: 'rgba(123, 31, 162, 0.7)',
-					display: 'flex',
-					flexDirection: 'column',
-					borderRadius: '15px',
-					alignItems: 'center'
-				}}
-			>
+		<div className="row form-wrapper">
+			<form className="col s12 l12 form" onSubmit={handleSubmit(onSubmit)}>
 				<div className="row">
 					<h4 className="col s12">{`${formType.slice(0, 1).toUpperCase()}${formType.slice(1)}`}</h4>
 				</div>
-				{formType === 'register' && (
-					<div className="row">
-						<div className="input-field col s12">
-							<input
-								style={{ color: 'white' }}
-								id="name"
-								type="text"
-								className="validate"
-								placeholder="First Name"
-							/>
+
+				{inputFields.map(({ id, type, placeholder }) => {
+					return (
+						<div className="row">
+							<div className="input-field col s12">
+								<input
+									id={id}
+									name={id}
+									type={type}
+									className="validate"
+									placeholder={placeholder}
+									ref={register({ required: true })}
+									key={`${id}-input`}
+								/>
+							</div>
 						</div>
-					</div>
-				)}
-				<div className="row">
-					<div className="input-field col s12">
-						<input
-							style={{ color: 'white' }}
-							id="email"
-							type="email"
-							className="validate"
-							placeholder="Email"
-						/>
-					</div>
-				</div>
-				<div className="row">
-					<div className="input-field col s12">
-						<input
-							style={{ color: 'white' }}
-							id="password"
-							type="password"
-							className="validate"
-							placeholder="Password"
-						/>
-					</div>
-				</div>
+					);
+				})}
 
 				<div className="row">
 					<button className="btn waves-effect waves-light col s12" type="submit" name="action">
