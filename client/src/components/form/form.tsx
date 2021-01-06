@@ -39,7 +39,7 @@ const Form: React.FC = () => {
 
 				{inputFields.map(({ id, type, placeholder }) => {
 					return (
-						<div className="row">
+						<div className="row" key={`${id}-input`}>
 							<div className="input-field col s12">
 								<input
 									id={id}
@@ -48,7 +48,6 @@ const Form: React.FC = () => {
 									className="validate"
 									placeholder={placeholder}
 									ref={register({ required: true })}
-									key={`${id}-input`}
 								/>
 							</div>
 						</div>
