@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/danylokarpenko-bs/easy-study.git"
+    "url": "git+https://github.com/postscriptumno/uniworks.git"
   },
   "author": "postscriptumno <postscriptum.no@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/danylokarpenko-bs/easy-study/issues"
+    "url": "https://github.com/postscriptumno/uniworks/issues"
   },
-  "homepage": "https://github.com/danylokarpenko-bs/easy-study#readme",
+  "homepage": "https://github.com/postscriptumno/uniworks#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "config": "^3.3.3",
