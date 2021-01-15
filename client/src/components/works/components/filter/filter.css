@@ -1,9 +1,0 @@
-.filter_wrapper {
-  background-color: rgb(123, 31, 162);
-  height: 100%;
-  width: 20%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 10px;
-}
