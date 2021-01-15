@@ -43,7 +43,7 @@ const Footer = () => {
 					</Navbar>
 					<Navbar style={{ width: '30%', display: 'flex', justifyContent: 'space-evenly' }}>
 						{socials.map(social => (
-							<>
+							<div key={`${social.name}-link`}>
 								<a
 									className="grey-text text-lighten-3 footer-social-logo"
 									href={social.href}
@@ -52,7 +52,7 @@ const Footer = () => {
 									<img className="social-logo_img" src={social.src} alt={`${social.name} logo`} />
 								</a>
 								<ReactTooltip />
-							</>
+							</div>
 						))}
 					</Navbar>
 				</Navbar>
