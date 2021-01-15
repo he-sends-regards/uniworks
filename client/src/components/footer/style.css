@@ -1,0 +1,19 @@
+.socials-list {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.footer-social-logo:hover {
+  filter: invert() drop-shadow(2px 16px 10px black);
+}
+
+.social-logo_img {
+  filter: invert();
+  width: 50px
+}
+
+.page-footer {
+  padding: 0;
+}
