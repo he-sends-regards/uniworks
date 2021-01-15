@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { createRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 
-import './style/style.css';
+import './form.css';
 
 const inputFields = [
 	{

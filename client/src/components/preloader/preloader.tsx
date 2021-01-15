@@ -1,6 +1,7 @@
 import React from 'react';
+import { Spinner } from 'react-bootstrap';
 
-import logo from '../headerNavigation/img/logo.png';
+import logo from '../footer/img/logo.png';
 
 const Preloader: React.FC = () => {
 	return (
@@ -14,20 +15,10 @@ const Preloader: React.FC = () => {
 				justifyContent: 'center'
 			}}
 		>
-			<img src={logo} style={{ width: '100px', filter: 'invert()' }} />
-			<div className="preloader-wrapper big active">
-				<div className="spinner-layer spinner-blue-only" style={{ borderColor: 'black' }}>
-					<div className="circle-clipper left">
-						<div className="circle"></div>
-					</div>
-					<div className="gap-patch">
-						<div className="circle"></div>
-					</div>
-					<div className="circle-clipper right">
-						<div className="circle"></div>
-					</div>
-				</div>
-			</div>
+			<img src={logo} style={{ width: '150px', filter: 'invert()' }} />
+			<Spinner animation="border" role="status">
+				<span className="sr-only">Loading...</span>
+			</Spinner>
 		</div>
 	);
 };

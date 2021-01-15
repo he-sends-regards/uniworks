@@ -1,19 +1,16 @@
-// Npm libs
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route, Link, useLocation } from 'react-router-dom';
-import Footer from '../footer/footer';
-import About from '../about/about';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
-// External components
-import HeaderNavigation from '../headerNavigation/headerNavigation';
+import Header from '../header/header';
 import Home from '../home/home';
-import Preloader from '../preloader/preloader';
-
-// Styles
-import './App.css';
 import Works from '../works/works';
 import Rules from '../rules/rules';
 import Form from '../form/form';
+import Footer from '../footer/footer';
+import About from '../about/about';
+import Preloader from '../preloader/preloader';
+
+import './App.css';
 
 const App: React.FC = () => {
 	const [isLoaded, setIsLoaded] = useState(false);
@@ -28,7 +25,7 @@ const App: React.FC = () => {
 		<div className="App">
 			{isLoaded ? (
 				<Router>
-					<HeaderNavigation />
+					<Header />
 					<Switch>
 						<Route path="/auth/:formType" exact>
 							<Form />
