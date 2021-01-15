@@ -39,16 +39,12 @@ const HeaderNavigation = () => {
 					))}
 				</Nav>
 				<Navbar className="justify-content-between" style={{ width: '18%' }}>
-					<Button variant="primary">
-						<Link style={linkStyle} to="/auth/login">
-							Login
-						</Link>
-					</Button>
-					<Button variant="secondary">
-						<Link style={linkStyle} to="/auth/register">
-							Register
-						</Link>
-					</Button>
+					<Link style={linkStyle} to="/auth/login">
+						<Button variant="primary">Login</Button>
+					</Link>
+					<Link style={linkStyle} to="/auth/register">
+						<Button variant="secondary">Register</Button>
+					</Link>
 				</Navbar>
 			</Navbar.Collapse>
 		</Navbar>
