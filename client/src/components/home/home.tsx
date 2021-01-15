@@ -28,12 +28,11 @@ const Home: React.FC = () => {
 	return (
 		<Carousel>
 			{carouselItems.map(item => (
-				<Carousel.Item>
-					<div className="bg-cover" style={{}}></div>
+				<Carousel.Item style={{ backgroundColor: 'red' }} key={`${item.alt}-caroutsel-item`}>
 					<img
 						className="d-inline-block w-100"
 						height="500px"
-						src="https://image.freepik.com/free-photo/black-concrete-wall_24972-1046.jpg"
+						src="https://www.solidbackgrounds.com/images/1200x600/1200x600-arsenic-solid-color-background.jpg"
 						alt={item.alt}
 					/>
 					<Carousel.Caption>
