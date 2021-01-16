@@ -30,6 +30,7 @@ const socials = [
 
 const Footer = () => {
 	const currentLocation = useLocation().pathname;
+	const socialsDirectionByWidth = window.screen.width < 500 ? 'column' : 'row';
 
 	return (
 		<>
@@ -41,7 +42,14 @@ const Footer = () => {
 					<Navbar style={{ fontSize: '1rem', textAlign: 'center', color: 'white', width: '30%' }}>
 						Copyright © 2020 UniWorks. All rights are reserved
 					</Navbar>
-					<Navbar style={{ width: '30%', display: 'flex', justifyContent: 'space-evenly' }}>
+					<Navbar
+						style={{
+							width: '30%',
+							display: 'flex',
+							flexDirection: socialsDirectionByWidth,
+							justifyContent: 'space-evenly'
+						}}
+					>
 						{socials.map(social => (
 							<div key={`${social.name}-link`}>
 								<a
