@@ -1,5 +1,6 @@
 .activeLink {
   text-decoration: underline;
+  color: grey !important;
 }
 
 .mx-10 {
