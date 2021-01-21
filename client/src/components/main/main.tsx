@@ -1,7 +1,7 @@
 import React from 'react';
 import { Carousel } from 'react-bootstrap';
 
-import './home.css';
+import './main.css';
 
 const carouselItems = [
 	{

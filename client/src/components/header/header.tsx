@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Navbar, Nav, Button } from 'react-bootstrap';
-import { headersData } from '../../Routes/routes';
+import { CLIENT_ROUTES } from '../../routes/routes';
 
 import './header.css';
 
@@ -45,7 +45,7 @@ const Header = () => {
 			<Navbar.Toggle aria-controls="basic-navbar-nav" />
 			<Navbar.Collapse id="basic-navbar-nav">
 				<Nav className="mr-auto">
-					{headersData.map(({ label, href }) => (
+					{Object.values(CLIENT_ROUTES).map(({ label, href }) => (
 						<Nav.Link key={`${label}-nav-element`}>
 							<Link to={href} className={`${currentLocation === href && `activeLink`} header-nav__link`}>
 								{label}
