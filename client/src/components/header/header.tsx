@@ -5,9 +5,24 @@ import { headersData } from '../../Routes/routes';
 
 import './header.css';
 
-const linkStyle = { color: '#fff', fontFamily: 'Montserrat, sans-serif', fontWeight: 400 };
+interface IAuthBtn {
+	[key: string]: string;
+}
 
-const HeaderNavigation = () => {
+const authButtons: IAuthBtn[] = [
+	{
+		title: 'Login',
+		variant: 'primary',
+		href: '/auth/login'
+	},
+	{
+		title: 'Register',
+		variant: 'secondary',
+		href: '/auth/register'
+	}
+];
+
+const Header = () => {
 	const currentLocation = useLocation().pathname;
 
 	return (
@@ -32,27 +47,28 @@ const HeaderNavigation = () => {
 				<Nav className="mr-auto">
 					{headersData.map(({ label, href }) => (
 						<Nav.Link key={`${label}-nav-element`}>
-							<Link to={href} style={linkStyle} className={`${currentLocation === href && `activeLink`}`}>
+							<Link to={href} className={`${currentLocation === href && `activeLink`} header-nav__link`}>
 								{label}
 							</Link>
 						</Nav.Link>
 					))}
 				</Nav>
 				<Navbar className="justify-content-between">
-					<Link style={linkStyle} to="/auth/login" className="mx-10">
-						<Button variant="primary" disabled={currentLocation === '/auth/login'}>
-							Login
-						</Button>
-					</Link>
-					<Link style={linkStyle} to="/auth/register" className="mx-10">
-						<Button variant="secondary" disabled={currentLocation === '/auth/register'}>
-							Register
-						</Button>
-					</Link>
+					{authButtons.map(authButton => (
+						<Link
+							to={authButton.href}
+							className="header-nav__link mx-10"
+							key={`${authButton.title}-btn-element`}
+						>
+							<Button variant={authButton.variant} disabled={currentLocation === authButton.href}>
+								{authButton.title}
+							</Button>
+						</Link>
+					))}
 				</Navbar>
 			</Navbar.Collapse>
 		</Navbar>
 	);
 };
 
-export default HeaderNavigation;
+export default Header;

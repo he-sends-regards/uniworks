@@ -5,3 +5,14 @@
 .mx-10 {
   padding: 0 10px;
 }
+
+.header-nav__link {
+  color: #fff;
+  font-family: 'Montserrat' sans-serif;
+  font-weight: 400
+}
+
+.header-nav__link:hover,
+.header-nav__link:active {
+  color: inherit;
+}
