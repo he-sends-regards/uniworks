@@ -6,7 +6,7 @@
 }
 
 .footer-social-logo:hover {
-  filter: invert() drop-shadow(2px 16px 10px black);
+  filter: invert(28%) sepia(13%) saturate(3207%) drop-shadow(2px 16px 10px black);
 }
 
 .social-logo_img {
