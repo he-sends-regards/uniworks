@@ -1,28 +1,37 @@
 import React from 'react';
 import { Tab, Row, Col, Nav } from 'react-bootstrap';
-import { subjects } from '../../../const';
+import { ISubject } from '../../../const';
 import { SubjectWin } from '../../subject-win/subject-win';
 import WorkFilter from '../work-filter/work-filter';
 
-export interface StandardComponentProps {
-	subjectId: string;
-	children: React.ReactNode;
-}
+type CourseType = {
+	subjects: ISubject[];
+};
 
-const SubjectFilter: React.FC = ({ subjectId }: StandardComponentProps) => {
-	const subjectByCourse = subjects[subjectId];
-
+const SubjectFilter: React.FC<CourseType> = ({ subjects }) => {
 	return (
 		<Tab.Container id="left-tabs-example" defaultActiveKey="first">
-			<Row>
-				<Col sm={2}>
+			<Row style={{ alignItems: 'center' }}>
+				<Col sm={1}>
 					<Nav variant="pills" className="flex-column" style={{ textAlign: 'center' }}>
-						{subjects.thirdCourse.map(subject => (
-							<WorkFilter subjectData={subject.data} subjectId={subject.id} />
+						{subjects.map(subject => (
+							<Nav.Item key={`${subject.name}-tab-name`}>
+								<Nav.Link eventKey={subject.eventkey}>{subject.name}</Nav.Link>
+							</Nav.Item>
+							// <WorkFilter subjectData={subject.data} subjectId={subject.id} />
 						))}
 					</Nav>
 				</Col>
-				<SubjectWin />
+				<Col sm={11}>
+					<Tab.Content>
+						{subjects.map(subject => (
+							<Tab.Pane eventKey={subject.eventkey} key={`${subject.name}-tab-data`}>
+								{/* <SubjectFilter subjects={course.subjects} /> */}
+								<WorkFilter works={subject.data} />
+							</Tab.Pane>
+						))}
+					</Tab.Content>
+				</Col>
 			</Row>
 		</Tab.Container>
 	);
