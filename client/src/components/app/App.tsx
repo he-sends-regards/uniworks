@@ -14,7 +14,7 @@ import {CLIENT_ROUTES} from '../../routes/routes';
 
 import './app.css';
 
-const App: React.FC = () => {
+const app: React.FC = () => {
 	const [isLoaded, setIsLoaded] = useState(false);
 
 	useEffect(() => {
@@ -24,7 +24,7 @@ const App: React.FC = () => {
 	}, []);
 
 	return (
-		<div className="App">
+		<div className="app">
 			{isLoaded ? (
 				<Router>
 					<Header />
@@ -59,4 +59,4 @@ const App: React.FC = () => {
 	);
 };
 
-export default App;
+export default app;
