@@ -1,14 +1,14 @@
 import React from 'react';
 import { Tab, Row, Col, Nav } from 'react-bootstrap';
-import { courses } from '../../../const';
 import SubjectFilter from '../subject-filter/subject-filter';
+import { courses } from '../../../const';
 import './course-filter.css';
 
 const CourseFilter: React.FC = ({}) => {
 	return (
 		<Tab.Container id="left-tabs-example" defaultActiveKey="first">
-			<Row style={{ width: '100%' }}>
-				<Col sm={1}>
+			<Row style={{ width: '100%', alignItems: 'center' }}>
+				<Col sm={1} style={{ float: 'none', margin: '0 auto' }}>
 					<Nav variant="pills" className="flex-column" style={{ textAlign: 'center' }}>
 						{courses.map(course => (
 							<Nav.Item key={`${course.name}-tab-name`}>
@@ -23,7 +23,7 @@ const CourseFilter: React.FC = ({}) => {
 					<Tab.Content>
 						{courses.map(course => (
 							<Tab.Pane eventKey={course.eventKey} key={`${course.name}-tab-data`}>
-								<SubjectFilter courseId={course.id} />
+								<SubjectFilter subjects={course.subjects} />
 							</Tab.Pane>
 						))}
 					</Tab.Content>
