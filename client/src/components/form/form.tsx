@@ -1,102 +1,174 @@
 import React from 'react';
-import { Row, Col, Form, Button } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 
 import './form.css';
 
-const inputFields = [
-	{
-		id: 'email',
-		type: 'email',
-		placeholder: 'Email'
-	},
-	{
-		id: 'password',
-		type: 'password',
-		placeholder: 'Password'
-	}
-];
+interface IRefRegTypes {
+	[key: string]: string;
+}
 
-type PersonScore = {
-	email: string;
-	password: string;
+type FormDataTypes = {
+	[key: string]: string;
 };
 
-const AuthForm: React.FC = () => {
-	const { register, handleSubmit } = useForm<PersonScore>();
-	let { formType }: any = ({} = useParams());
+interface UrlParamTypes {
+	formType: string;
+}
 
-	const onSubmit = (data: PersonScore) => {
-		console.log('data', data);
-	};
+const AuthForm: React.FC = () => {
+	const { formType } = useParams<UrlParamTypes>();
+	const { register, handleSubmit, errors } = useForm();
+
+	const onSubmit = (data: FormDataTypes) => console.log(data);
 
 	return (
-		<div className="form-wrapper">
-			<h2>{formType === 'login' ? `Вход в систему` : 'Регистрация'}</h2>
-			<Form className="form">
-				{formType === 'register' && (
-					<Form.Group>
-						<Form.Label>Имя</Form.Label>
-						<Form.Control type="text" placeholder="Введите имя" />
+		<>
+			<div className="form-wrapper">
+				<h2>{formType === 'login' ? `Вход в систему` : 'Регистрация'}</h2>
+				<Form className="form" onSubmit={handleSubmit(onSubmit)}>
+					{formType === 'register' && (
+						<Form.Group>
+							<Form.Label htmlFor="name">Имя</Form.Label>
+							<Form.Control
+								ref={register({ required: true, maxLength: 30, minLength: 2 })}
+								type="text"
+								id="name"
+								name="name"
+								aria-invalid={errors.name ? 'true' : 'false'}
+								placeholder="Введите имя"
+							/>
+							{errors.name && errors.name.type === 'required' && (
+								<span role="alert">This is required</span>
+							)}
+							{errors.name && errors.name.type === 'maxLength' && (
+								<span role="alert">Max length exceeded</span>
+							)}
+							{errors.name && errors.name.type === 'minLength' && (
+								<span role="alert">Min length exceeded</span>
+							)}
+						</Form.Group>
+					)}
+
+					<Form.Group id="formBasicEmail">
+						<Form.Label htmlFor="email">Email</Form.Label>
+						<Form.Control
+							ref={register({ required: true })}
+							name="email"
+							id="email"
+							type="email"
+							aria-invalid={errors.email ? 'true' : 'false'}
+							placeholder="Введите email"
+						/>
+						{errors.email && errors.email.type === 'required' && <span role="alert">This is required</span>}
+						<Form.Text className="text-muted">We'll never share your email with anyone else.</Form.Text>
 					</Form.Group>
-				)}
 
-				<Form.Group id="formBasicEmail">
-					<Form.Label>Email</Form.Label>
-					<Form.Control type="email" placeholder="Введите email" />
-					<Form.Text className="text-muted">We'll never share your email with anyone else.</Form.Text>
-				</Form.Group>
-
-				<Form.Group id="formBasicPassword">
-					<Form.Label>Пароль</Form.Label>
-					<Form.Control type="password" placeholder="Введите пароль" />
-				</Form.Group>
-
-				{formType === 'login' && (
-					<Form.Group id="formBasicCheckbox">
-						<Form.Check type="checkbox" label="Остаться в системе" />
+					<Form.Group id="formBasicPassword">
+						<Form.Label htmlFor="password">Пароль</Form.Label>
+						<Form.Control
+							ref={register({ required: true, maxLength: 16, minLength: 7 })}
+							name="password"
+							id="password"
+							type="password"
+							placeholder="Введите пароль"
+						/>
+						{errors.password && errors.password.type === 'required' && (
+							<span role="alert">This is required</span>
+						)}
+						{errors.password && errors.password.type === 'maxLength' && (
+							<span role="alert">Max length exceeded</span>
+						)}
+						{errors.password && errors.password.type === 'minLength' && (
+							<span role="alert">Min length exceeded</span>
+						)}
 					</Form.Group>
-				)}
 
-				<Button variant="primary" type="submit">
-					Submit
-				</Button>
-			</Form>
-		</div>
+					{formType === 'login' && (
+						<Form.Group id="formBasicCheckbox">
+							<Form.Check type="checkbox" label="Остаться в системе" />
+						</Form.Group>
+					)}
 
-		// <div className="row form-wrapper">
-		// 	<form className="col s6 l12 form" onSubmit={handleSubmit(onSubmit)}>
-		// 		<div className="row">
-		// 			<h4 className="col s6">{`${formType.slice(0, 1).toUpperCase()}${formType.slice(1)}`}</h4>
-		// 		</div>
-
-		// 		{inputFields.map(({ id, type, placeholder }) => {
-		// 			return (
-		// 				<div className="row" key={`${id}-input`}>
-		// 					<div className="input-field col s12">
-		// 						<input
-		// 							id={id}
-		// 							name={id}
-		// 							type={type}
-		// 							className="validate"
-		// 							placeholder={placeholder}
-		// 							ref={register({ required: true })}
-		// 						/>
-		// 					</div>
-		// 				</div>
-		// 			);
-		// 		})}
-
-		// 		<div className="row">
-		// 			<button className="btn waves-effect waves-light col s6" type="submit" name="action">
-		// 				Submit
-		// 				<i className="material-icons right">send</i>
-		// 			</button>
-		// 		</div>
-		// 	</form>
-		// </div>
+					<Button variant="primary" type="submit">
+						Submit
+					</Button>
+				</Form>
+			</div>
+		</>
 	);
 };
 
 export default AuthForm;
+
+const refRegisterAlerts: IRefRegTypes = {
+	required: 'This is required',
+	minLength: 'Min length exceeded',
+	maxLength: 'Max length exceeded'
+};
+
+// const inputFields = [
+// 	{
+// 		formGroupId: '',
+// 		id: 'name',
+// 		name: 'name',
+// 		type: 'name',
+// 		label: 'Имя',
+// 		placeholder: 'Введите имя',
+// 		refRegister: { required: true, maxLength: 30, minLength: 2 }
+// 	},
+// 	{
+// 		formGroupId: 'formBasicEmail',
+// 		id: 'email',
+// 		name: 'email',
+// 		type: 'email',
+// 		label: 'Email',
+// 		placeholder: 'Введите еmail',
+// 		refRegister: { required: true }
+// 	},
+// 	{
+// 		formGroupId: 'formBasicPassword',
+// 		id: 'password',
+// 		name: 'password',
+// 		type: 'password',
+// 		label: 'Пароль',
+// 		placeholder: 'Введите пароль',
+// 		refRegister: { required: true, maxLength: 16, minLength: 7 }
+// 	}
+// ];
+
+{
+	/* {inputFields.map(inputField => {
+						if (formType === 'login' && inputField.name === 'name') {
+							return;
+						}
+
+						return (
+							<Form.Group id={inputField.formGroupId}>
+								<Form.Label htmlFor={inputField.id}>{inputField.label}</Form.Label>
+								<Form.Control
+									ref={register(inputField.refRegister)}
+									type={inputField.type}
+									id={inputField.id}
+									name={inputField.name}
+									aria-invalid={errors[inputField.name] ? 'true' : 'false'}
+									placeholder={inputField.placeholder}
+								/>
+
+								{Object.entries(inputField.refRegister).map(([key, value]) => {
+									console.log(errors[inputField.name] && errors[inputField.name].type === value);
+
+									return (
+										errors[inputField.name] &&
+										errors[inputField.name].type === value && (
+											<span role="alert" style={{ color: 'black' }}>
+												{refRegisterAlerts[key]}
+											</span>
+										)
+									);
+								})}
+							</Form.Group>
+						);
+					})} */
+}
