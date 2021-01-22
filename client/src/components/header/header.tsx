@@ -12,12 +12,12 @@ interface IAuthBtn {
 const authButtons: IAuthBtn[] = [
 	{
 		title: 'Login',
-		variant: 'primary',
+		variant: 'success',
 		href: '/auth/login'
 	},
 	{
 		title: 'Register',
-		variant: 'secondary',
+		variant: 'primary',
 		href: '/auth/register'
 	}
 ];
@@ -27,7 +27,7 @@ const Header = () => {
 
 	return (
 		<Navbar bg="dark" variant="dark" expand="lg">
-			<Navbar.Brand href="#home">
+			<Navbar.Brand>
 				<Link
 					to="/"
 					style={{
@@ -46,7 +46,7 @@ const Header = () => {
 			<Navbar.Collapse id="basic-navbar-nav">
 				<Nav className="mr-auto">
 					{Object.values(CLIENT_ROUTES).map(({ label, href }) => (
-						<Nav.Link key={`${label}-nav-element`}>
+						<Nav.Link key={`${label}-nav-element`} disabled={currentLocation === href}>
 							<Link to={href} className={`${currentLocation === href && `activeLink`} header-nav__link`}>
 								{label}
 							</Link>

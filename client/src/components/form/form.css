@@ -1,21 +1,11 @@
 .form-wrapper {
-  width: 40%;
-  font-family: 'Montserrat' sans-serif;
-  font-weight: 200;
-  font-style: italic;
-  box-shadow: 0 0 15px black;
-  border-radius: 15px;
-  color: white;
-}
-
-.form {
-  background-color: rgba(123, 31, 162, 0.7);
+  width: 100%;
   display: flex;
   flex-direction: column;
-  border-radius: 15px;
+  justify-content: center;
   align-items: center;
 }
 
-input {
-  color: white;
+.form {
+  width: 30%;
 }
