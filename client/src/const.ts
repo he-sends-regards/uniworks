@@ -238,3 +238,12 @@ export const subjects:ISubjects = {
   secondCourse: [],
   firstCourse: []
 };
+
+type StringObject = {
+  [key: string]: string
+}
+
+export const AuthorizationStatus: StringObject = {
+  AUTH: 'AUTH',
+  NO_AUTH: 'NO_AUTH'
+}
