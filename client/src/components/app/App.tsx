@@ -10,11 +10,11 @@ import Footer from '../footer/footer';
 import About from '../about/about';
 import Preloader from '../preloader/preloader';
 
-import {CLIENT_ROUTES} from '../../routes/routes';
+import { CLIENT_ROUTES } from '../../routes/routes';
 
-import './app.css';
+import './App.css';
 
-const app: React.FC = () => {
+const App: React.FC = () => {
 	const [isLoaded, setIsLoaded] = useState(false);
 
 	useEffect(() => {
@@ -59,4 +59,4 @@ const app: React.FC = () => {
 	);
 };
 
-export default app;
+export default App;
