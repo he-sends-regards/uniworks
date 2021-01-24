@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Dropdown, Button } from 'react-bootstrap';
 
-import { subjects } from '../../const';
+// import { subjects } from '../../const';
 
 import './subject-win.css';
 

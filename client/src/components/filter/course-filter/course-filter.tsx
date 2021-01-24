@@ -1,7 +1,7 @@
 import React from 'react';
 import { Tab, Row, Col, Nav } from 'react-bootstrap';
 import SubjectFilter from '../subject-filter/subject-filter';
-import { courses } from '../../../const';
+import { data } from '../../../const';
 import './course-filter.css';
 
 const CourseFilter: React.FC = ({}) => {
@@ -10,7 +10,7 @@ const CourseFilter: React.FC = ({}) => {
 			<Row style={{ width: '100%', alignItems: 'center' }}>
 				<Col sm={1} style={{ float: 'none', margin: '0 auto' }}>
 					<Nav variant="pills" className="flex-column" style={{ textAlign: 'center' }}>
-						{courses.map(course => (
+						{data.map(course => (
 							<Nav.Item key={`${course.name}-tab-name`}>
 								<Nav.Link eventKey={course.eventKey} disabled={course.disabled}>
 									{course.name}
@@ -21,7 +21,7 @@ const CourseFilter: React.FC = ({}) => {
 				</Col>
 				<Col sm={11}>
 					<Tab.Content>
-						{courses.map(course => (
+						{data.map(course => (
 							<Tab.Pane eventKey={course.eventKey} key={`${course.name}-tab-data`}>
 								<SubjectFilter subjects={course.subjects} />
 							</Tab.Pane>
