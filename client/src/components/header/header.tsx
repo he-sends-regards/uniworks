@@ -1,28 +1,19 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Navbar, Nav, Button } from 'react-bootstrap';
+import { Navbar, Nav } from 'react-bootstrap';
+import { connect } from 'react-redux';
 import { CLIENT_ROUTES } from '../../routes/routes';
+import HeaderBtnNav from './header-btn-nav';
+import { AuthorizationStatus } from '../../const';
 
 import './header.css';
 
-interface IAuthBtn {
-	[key: string]: string;
+// ! Написать через константу
+interface IHeaderProps {
+	authorizationStatus: 'AUTH' | 'NO_AUTH';
 }
 
-const authButtons: IAuthBtn[] = [
-	{
-		title: 'Login',
-		variant: 'success',
-		href: '/auth/login'
-	},
-	{
-		title: 'Register',
-		variant: 'primary',
-		href: '/auth/register'
-	}
-];
-
-const Header = () => {
+const Header: React.FC<IHeaderProps> = ({ authorizationStatus }) => {
 	const currentLocation = useLocation().pathname;
 
 	return (
@@ -53,22 +44,19 @@ const Header = () => {
 						</Nav.Link>
 					))}
 				</Nav>
-				<Navbar className="justify-content-between">
-					{authButtons.map(authButton => (
-						<Link
-							to={authButton.href}
-							className="header-nav__link mx-10"
-							key={`${authButton.title}-btn-element`}
-						>
-							<Button variant={authButton.variant} disabled={currentLocation === authButton.href}>
-								{authButton.title}
-							</Button>
-						</Link>
-					))}
-				</Navbar>
+
+				{authorizationStatus === AuthorizationStatus.AUTH ? (
+					<span>Account</span>
+				) : (
+					<HeaderBtnNav currentLocation={currentLocation} />
+				)}
 			</Navbar.Collapse>
 		</Navbar>
 	);
 };
 
-export default Header;
+const mapStateToProps = (state: any) => ({
+	authorizationStatus: state.authorizationStatus
+});
+
+export default connect(mapStateToProps)(Header);
