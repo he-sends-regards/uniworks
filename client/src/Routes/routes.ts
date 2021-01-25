@@ -20,7 +20,11 @@ export const CLIENT_ROUTES: IRoutes = {
     href: "/rules"
   },
   auth: {
-    label: "",
+    label: "Авторизация",
     href: "/auth/:formType"
+  },
+  account: {
+    label: "Аккаунт",
+    href: "/account"
   }
 }
