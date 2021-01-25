@@ -9,6 +9,7 @@ import Form from '../form/form';
 import Footer from '../footer/footer';
 import About from '../about/about';
 import Preloader from '../preloader/preloader';
+import Account from '../account/account';
 
 import { CLIENT_ROUTES } from '../../routes/routes';
 
@@ -40,6 +41,9 @@ const App: React.FC = () => {
 						</Route>
 						<Route path={CLIENT_ROUTES.rules.href} exact>
 							<Rules />
+						</Route>
+						<Route path={CLIENT_ROUTES.account.href} exact>
+							<Account />
 						</Route>
 						<Route path={CLIENT_ROUTES.main.href} exact>
 							<Main />
