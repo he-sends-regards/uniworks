@@ -9,7 +9,7 @@ import Form from '../form/form';
 import Footer from '../footer/footer';
 import About from '../about/about';
 import Preloader from '../preloader/preloader';
-import Account from '../../account/account';
+import Account from '../account/account';
 
 import { CLIENT_ROUTES } from '../../routes/routes';
 
