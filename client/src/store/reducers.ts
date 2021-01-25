@@ -12,6 +12,13 @@ export const reducer = (state = initialState, action: IStoreActions) => {
       return Object.assign({}, state, {
         authorizationStatus: action.payload,
       });
+    
+    case ActionType.SWITCH_AUTH_STATUS:
+      return Object.assign({}, state, {
+        authorizationStatus: state.authorizationStatus === AuthorizationStatus.AUTH
+          ? AuthorizationStatus.NO_AUTH
+          : AuthorizationStatus.AUTH,
+      });
   }
 
   return state;
