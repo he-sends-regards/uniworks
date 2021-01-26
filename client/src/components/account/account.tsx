@@ -29,9 +29,9 @@ const Account: React.FC<IAccountProps> = ({ authorizationStatus, currentUser, lo
 	return (
 		<div className="account">
 			<Tab.Container id="left-tabs-example" defaultActiveKey="n1">
-				<Row style={{ width: '100%', alignItems: 'center' }}>
-					<Col sm={2} style={{ float: 'none', margin: '0 auto' }}>
-						<Nav variant="pills" className="flex-column" style={{ textAlign: 'center' }}>
+				<Row className="account__tab-nav">
+					<Col sm={2} className="account__tab-nav_title">
+						<Nav variant="pills" className="flex-column">
 							<Nav.Item>
 								<Nav.Link eventKey="n1">Ваши данные</Nav.Link>
 							</Nav.Item>
@@ -40,8 +40,8 @@ const Account: React.FC<IAccountProps> = ({ authorizationStatus, currentUser, lo
 							</Nav.Item>
 
 							<Button
+								className="account__tab-nav_logout-btn"
 								variant="danger"
-								style={{ marginTop: '30px' }}
 								onClick={() => {
 									logout();
 									return <Redirect to="/auth/login" />;
@@ -51,16 +51,7 @@ const Account: React.FC<IAccountProps> = ({ authorizationStatus, currentUser, lo
 							</Button>
 						</Nav>
 					</Col>
-					<Col
-						sm={10}
-						style={{
-							display: 'flex',
-							justifyContent: 'center',
-							alignItems: 'center',
-							fontSize: '1.6rem',
-							fontFamily: 'Roboto'
-						}}
-					>
+					<Col sm={10} className="account__tab-nav_content">
 						<Tab.Content>
 							<Tab.Pane eventKey="n1">
 								Имя: {currentUser.name}
@@ -69,9 +60,14 @@ const Account: React.FC<IAccountProps> = ({ authorizationStatus, currentUser, lo
 								<br />
 								Пароль: {isPasswordVisible ? currentUser.password : '******'}
 								<br />
-								<Button variant="warning" onClick={() => setPasswordVisible(!isPasswordVisible)}>
-									{`${isPasswordVisible ? 'Скрыть' : 'Показать'} пароль`}
-								</Button>
+								<div className="account__tab-nav_password-btns-container">
+									<Button variant="warning" onClick={() => setPasswordVisible(!isPasswordVisible)}>
+										{`${isPasswordVisible ? 'Скрыть' : 'Показать'} пароль`}
+									</Button>
+									<Button variant="success" onClick={() => setPasswordVisible(!isPasswordVisible)}>
+										{`Сменить пароль`}
+									</Button>
+								</div>
 							</Tab.Pane>
 						</Tab.Content>
 						<Tab.Content>
