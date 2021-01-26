@@ -8,14 +8,24 @@ import HeaderAccBtn from './header-acc-btn';
 import { AuthorizationStatus } from '../../const';
 
 import './header.css';
+import { ActionType } from '../../store/actions';
 
 // ! Написать через константу
 interface IHeaderProps {
 	authorizationStatus: 'AUTH' | 'NO_AUTH';
 	switchAuthStatus?: any;
+	registerUser?: any;
+	logout?: any;
 }
 
-const Header: React.FC<IHeaderProps> = ({ authorizationStatus, switchAuthStatus }) => {
+// ! Mock user
+const MockUser = {
+	name: 'Иван',
+	email: 'postscriptum.no@gmail.com',
+	password: 'password123'
+};
+
+const Header: React.FC<IHeaderProps> = ({ authorizationStatus, switchAuthStatus, registerUser, logout }) => {
 	const currentLocation = useLocation().pathname;
 
 	return (
@@ -48,7 +58,14 @@ const Header: React.FC<IHeaderProps> = ({ authorizationStatus, switchAuthStatus 
 				</Nav>
 
 				{/* Временная кнопка смены статуса авторизации для разработки */}
-				<Button variant="danger" onClick={() => switchAuthStatus()} style={{ fontSize: '12px' }}>
+				<Button
+					variant="danger"
+					onClick={() => {
+						switchAuthStatus();
+						authorizationStatus === AuthorizationStatus.AUTH ? logout() : registerUser(MockUser);
+					}}
+					style={{ fontSize: '12px' }}
+				>
 					Сменить статус авторизации на{' '}
 					{authorizationStatus === AuthorizationStatus.AUTH
 						? AuthorizationStatus.NO_AUTH
@@ -71,7 +88,9 @@ const mapStateToProps = (state: any) => ({
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-	switchAuthStatus: () => dispatch({ type: 'SWITCH_AUTH_STATUS' })
+	switchAuthStatus: () => dispatch({ type: ActionType.SWITCH_AUTH_STATUS }),
+	registerUser: (userData: any) => dispatch({ type: ActionType.REGISTER_USER, payload: userData }),
+	logout: () => dispatch({ type: ActionType.LOGOUT })
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
