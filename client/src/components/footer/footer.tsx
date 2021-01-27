@@ -30,39 +30,32 @@ const socials = [
 
 const Footer = () => {
 	const currentLocation = useLocation().pathname;
-	const socialsDirectionByWidth = window.screen.width < 500 ? 'column' : 'row';
 
 	return (
 		<>
 			{currentLocation !== '/rules' && (
-				<Navbar expand="lg" variant="light" bg="dark" className="justify-content-between">
-					<Navbar.Brand style={{ width: '30%', display: 'flex', justifyContent: 'center' }}>
-						<img src={logo} width="80px" />
-					</Navbar.Brand>
-					<Navbar style={{ fontSize: '1rem', textAlign: 'center', color: 'white', width: '30%' }}>
-						Copyright © 2020 UniWorks. All rights are reserved
-					</Navbar>
-					<Navbar
-						style={{
-							width: '30%',
-							display: 'flex',
-							flexDirection: socialsDirectionByWidth,
-							justifyContent: 'space-evenly'
-						}}
-					>
+				<Navbar expand="lg" className="justify-content-between" variant="light" bg="dark">
+					<div className="footer__logo_container">
+						<img className="footer__logo" src={logo} />
+					</div>
+
+					<span className="footer__copyright_text">Copyright © 2020 UniWorks. All rights are reserved</span>
+
+					<nav className="footer__socials">
 						{socials.map(social => (
-							<div key={`${social.name}-link`}>
+							<>
 								<a
-									className="grey-text text-lighten-3 footer-social-logo"
+									key={`${social.name}-link`}
+									className="socials__item"
 									href={social.href}
 									data-tip={`Link to ${social.name}`}
 								>
-									<img className="social-logo_img" src={social.src} alt={`${social.name} logo`} />
+									<img className="socials__item_img" src={social.src} alt={`${social.name} logo`} />
 								</a>
 								<ReactTooltip />
-							</div>
+							</>
 						))}
-					</Navbar>
+					</nav>
 				</Navbar>
 			)}
 		</>
