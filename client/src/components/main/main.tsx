@@ -28,7 +28,7 @@ const Home: React.FC = () => {
 	return (
 		<Carousel>
 			{carouselItems.map(item => (
-				<Carousel.Item style={{ backgroundColor: 'red' }} key={`${item.alt}-caroutsel-item`}>
+				<Carousel.Item style={{ backgroundColor: 'red' }} key={`${item.alt}-carousel-item`}>
 					<img
 						className="d-inline-block w-100"
 						height="500px"

@@ -11,6 +11,10 @@ interface IRefRegTypes {
 	[key: string]: string;
 }
 
+interface IAuthFormProps {
+	authorizationStatus?: 'AUTH' | 'NO_AUTH';
+}
+
 interface UrlParamTypes {
 	formType: string;
 }
@@ -18,10 +22,6 @@ interface UrlParamTypes {
 type FormDataTypes = {
 	[key: string]: string;
 };
-
-interface IAuthFormProps {
-	authorizationStatus?: 'AUTH' | 'NO_AUTH';
-}
 
 const AuthForm: React.FC<IAuthFormProps> = ({ authorizationStatus }) => {
 	if (authorizationStatus === AuthorizationStatus.AUTH) {
@@ -35,7 +35,7 @@ const AuthForm: React.FC<IAuthFormProps> = ({ authorizationStatus }) => {
 	const onSubmit = (data: FormDataTypes) => console.log(data);
 
 	return (
-		<div className="form-wrapper">
+		<div className="form-container">
 			<h2>{formType === 'login' ? `Вход в систему` : 'Регистрация'}</h2>
 			<Form className="form" onSubmit={handleSubmit(onSubmit)}>
 				{formType === 'register' && (
