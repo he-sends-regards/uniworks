@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React, { useState } from 'react';
-import { Dropdown, Button } from 'react-bootstrap';
+import { Dropdown, Button, Tooltip } from 'react-bootstrap';
 
 import './filter.css';
 
@@ -138,9 +138,21 @@ const Filter = () => {
 				</Dropdown.Menu>
 			</Dropdown>
 
-			<Button variant="info" onClick={() => console.log(filterData)}>
-				Применить
-			</Button>
+			{filterData.course.id.length !== 0 &&
+			filterData.faculty.id.length !== 0 &&
+			filterData.subject.id.length !== 0 &&
+			filterData.work.id.length !== 0 ? (
+				<Button variant="success" onClick={() => console.log(filterData)}>
+					Применить
+				</Button>
+			) : (
+				<>
+					<Button style={{ cursor: 'not-allowed' }} data-tip="Не все фильтры выбраны" variant="danger">
+						Применить
+					</Button>
+					<Tooltip />
+				</>
+			)}
 		</div>
 	);
 };
