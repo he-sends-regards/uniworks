@@ -6,121 +6,85 @@ export interface ISubject {
   data: string[];
 }
 
-export const data: {name: string, id: string, eventKey: string, disabled: boolean, subjects: ISubject[]}[] = [
+const faculties = [
   {
-    name: '3 курс',
-    id: 'thirdCourse',
-    eventKey: 'third-course',
-    disabled: false,
-    subjects: [
-      {
-        name: 'ММДС',
-        id: 'mmds',
-        eventkey: 'mmds',
-        href: '',
-        data: [
-          'л.р.№3.1',
-          'л.р.№3.2',
-          'РГР',
-          'л.р.№4.1',
-          'л.р.№4.2',
-          'л.р.№4.3',
-          'л.р.№4.4',
-        ]
-      },
-      {
-        name: 'СА',
-        id: 'sa',
-        eventkey: 'sa',
-        href: '',
-        data: [
-          'л.р.№1',
-          'л.р.№2',
-          'л.р.№3',
-          'л.р.№1_2',
-          'ДЗ',
-          'МКР№1',
-          'МКР№2',
-        ]
-      },
-      {
-        name: 'ОТИС',
-        id: 'otis',
-        eventkey: 'otis',
-        href: '',
-        data: [
-          'л.р.№1-1',
-          'л.р.№1-2',
-          'л.р.№1-3',
-          'МКР№1',
-          'л.р.№2-1',
-          'л.р.№2-2',
-          'л.р.№2-3',
-          'л.р.№2-4',
-          'МКР№2',
-        ]
-      },
-      {
-        name: 'ММДО',
-        id: 'mmdo',
-        eventkey: 'mmdo',
-        href: '',
-        data: [
-          'л.р.№1',
-          'ДЗ'
-        ]
-      },
-      {
-        name: 'ТКП',
-        id: 'tkp',
-        eventkey: 'tkp',
-        href: '',
-        data: [
-          'л.р.№1',
-          'л.р.№2',
-          'л.р.№3',
-          'л.р.№4',
-          'л.р.№5',
-          'л.р.№6',
-          'л.р.№7',
-          'МКР№1',
-          'МКР№2'
-        ]
-      },
-      {
-        name: 'ОБДЗ',
-        id: 'obdz',
-        eventkey: 'obdz',
-        href: '',
-        data: [
-          'л.р.№1',
-          'л.р.№2',
-          'л.р.№3',
-          'л.р.№4',
-          'л.р.№5',
-          'л.р.№6',
-          'МКР№1',
-          'МКР№2',
-          'Курсовая'
-        ]
-      }
-    ]
-  },
-  {
-    name: '2 курс',
-    id: 'secondCourse',
-    eventKey: 'second-course',
-    disabled: true,
-    subjects: []
-  },
-  {
-    name: '1 курс',
-    id: 'firstCourse',
-    eventKey: 'first-course',
-    disabled: true,
-    subjects: []
+    id: 'fkkpi',
+    name: 'ФККПИ'
   }
 ];
+
+const courses = [
+  {
+    id: 'thirdCourse',
+    name: 'Третий курс'
+  },
+  {
+    id: 'secondCourse',
+    name: 'Второй курс'
+  },
+  {
+    id: 'firstCourse',
+    name: 'Первый курс'
+  },
+];
+
+const subjects = {
+  fkkpi: {
+    thirdCourse: [
+      {
+        id: 'mmds',
+        name: 'ММДС'
+      },
+      {
+        id: 'sa',
+        name: 'СА'
+      },
+      {
+        id: 'obdz',
+        name: 'ОБДЗ'
+      },
+    ]
+  }
+};
+
+const works = {
+  mmds: [
+    {
+      id: 'lw3_1',
+      name: 'Л.Р.№3-1'
+    },
+    {
+      id: 'lw3_2',
+      name: 'Л.Р.№3-2'
+    },
+    {
+      id: 'rgr',
+      name: 'РГР'
+    },
+  ],
+  sa: [
+    {
+      id: 'lw1_1',
+      name: 'Л.Р.№1'
+    },
+    {
+      id: 'lw1_2',
+      name: 'Л.Р.№2'
+    },
+  ],
+  obdz: [
+    {
+      id: 'lw1',
+      name: 'Л.Р.№1'
+    },
+    {
+      id: 'lw2',
+      name: 'Л.Р.№2'
+    },
+  ]
+};
+
+export {faculties, courses, subjects, works};
 
 export type StringObjectType = {
   [key: string]: string

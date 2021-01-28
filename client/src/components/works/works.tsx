@@ -6,9 +6,7 @@ import './works.css';
 const Works = () => {
 	return (
 		<div className="works-container">
-			<div>
-				<Filter />
-			</div>
+			<Filter />
 		</div>
 	);
 };

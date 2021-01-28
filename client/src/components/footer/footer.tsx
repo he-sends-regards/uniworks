@@ -43,17 +43,12 @@ const Footer = () => {
 
 					<nav className="footer__socials">
 						{socials.map(social => (
-							<>
-								<a
-									key={`${social.name}-link`}
-									className="socials__item"
-									href={social.href}
-									data-tip={`Link to ${social.name}`}
-								>
+							<div key={`${social.name}-link`}>
+								<a className="socials__item" href={social.href} data-tip={`Link to ${social.name}`}>
 									<img className="socials__item_img" src={social.src} alt={`${social.name} logo`} />
 								</a>
 								<ReactTooltip />
-							</>
+							</div>
 						))}
 					</nav>
 				</Navbar>
