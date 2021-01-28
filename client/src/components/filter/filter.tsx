@@ -5,8 +5,14 @@ import { Dropdown, Button, Tooltip } from 'react-bootstrap';
 import './filter.css';
 
 import { faculties, courses, subjects, works } from '../../const';
+import { connect } from 'react-redux';
+import { ActionType } from '../../store/actions';
 
-const Filter = () => {
+interface IFilterProps {
+	setFilters?: any;
+}
+
+const Filter: React.FC<IFilterProps> = ({ setFilters }) => {
 	const [filterData, setFilterData] = useState({
 		faculty: {
 			id: '',
@@ -142,7 +148,7 @@ const Filter = () => {
 			filterData.faculty.id.length !== 0 &&
 			filterData.subject.id.length !== 0 &&
 			filterData.work.id.length !== 0 ? (
-				<Button variant="success" onClick={() => console.log(filterData)}>
+				<Button variant="success" onClick={() => setFilters(filterData)}>
 					Применить
 				</Button>
 			) : (
@@ -157,4 +163,8 @@ const Filter = () => {
 	);
 };
 
-export default Filter;
+const mapDispatchToProps = (dispatch: any) => ({
+	setFilters: filterData => dispatch({ type: ActionType.SET_FILTERS, payload: filterData })
+});
+
+export default connect(null, mapDispatchToProps)(Filter);
