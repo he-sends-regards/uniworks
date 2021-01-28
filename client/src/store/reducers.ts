@@ -4,12 +4,14 @@ import { AuthorizationStatus } from './../const';
 
 interface IStoreInitialState {
   authorizationStatus: string,
-  currentUser: object
+  currentUser: object,
+  filterData: object
 }
 
 export const initialState: IStoreInitialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
-  currentUser: {}
+  currentUser: {},
+  filterData: {}
 };
 
 export const reducer = (state = initialState, action: IStoreActions) => {
@@ -35,6 +37,11 @@ export const reducer = (state = initialState, action: IStoreActions) => {
       return Object.assign({}, state, {
         currentUser: {},
         authorizationStatus: AuthorizationStatus.NO_AUTH
+      });
+
+    case ActionType.SET_FILTERS:
+      return Object.assign({}, state, {
+        filterData: action.payload
       });
   }
 
