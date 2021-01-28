@@ -2,17 +2,11 @@
 import React, { useState } from 'react';
 import { Dropdown, Button } from 'react-bootstrap';
 
-import SubjectFilter from './subject-filter/subject-filter';
-import CourseFilter from './course-filter/course-filter';
-import WorkFilter from './work-filter/work-filter';
-
 import './filter.css';
 
 import { faculties, courses, subjects, works } from '../../const';
 
 const Filter = () => {
-	// return <CourseFilter></CourseFilter>;
-
 	const [filterData, setFilterData] = useState({
 		faculty: {
 			id: '',
