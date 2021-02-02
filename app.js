@@ -5,6 +5,9 @@ const router = require('./routes/auth.routes.js');
 
 const app = express();
 
+app.use(express.json({
+  extended: true
+}))
 app.use('/api/auth', router);
 
 const PORT = config.get('port') // process.env.PORT ?? 5000;
