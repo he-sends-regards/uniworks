@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { connect } from 'react-redux';
 import { Redirect, useParams } from 'react-router-dom';
 import { AuthorizationStatus } from '../../const';
+import { useHttp } from '../../hooks/http.hook';
 
 import './form.css';
 
@@ -29,15 +30,23 @@ const AuthForm: React.FC<IAuthFormProps> = ({ authorizationStatus }) => {
 		return <Redirect to="/account" />;
 	}
 
+	const { loading, error, request } = useHttp();
 	const { formType } = useParams<UrlParamTypes>();
 	const { register, handleSubmit, errors } = useForm();
+
+	const registerHandler = async (formData: FormDataTypes) => {
+		try {
+			const data = await request(`/api/auth/${formType}`, 'POST', formData);
+			console.log(data);
+		} catch (e) {}
+	};
 
 	const onSubmit = (data: FormDataTypes) => console.log(data);
 
 	return (
 		<div className="form-container">
 			<h2>{formType === 'login' ? `Вход в систему` : 'Регистрация'}</h2>
-			<Form className="form" onSubmit={handleSubmit(onSubmit)}>
+			<Form className="form" onSubmit={handleSubmit(registerHandler)}>
 				{formType === 'register' && (
 					<Form.Group>
 						<Form.Label htmlFor="name">Имя</Form.Label>
@@ -99,7 +108,7 @@ const AuthForm: React.FC<IAuthFormProps> = ({ authorizationStatus }) => {
 					</Form.Group>
 				)}
 
-				<Button variant="primary" type="submit">
+				<Button variant="primary" type="submit" disabled={loading}>
 					Submit
 				</Button>
 			</Form>
