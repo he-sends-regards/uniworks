@@ -11,11 +11,11 @@ const PORT = config.get('port') // process.env.PORT ?? 5000;
 
 async function start() {
   try {
-    await mongoose.connect(config.get('mongoUri', {
+    await mongoose.connect(config.get('mongoUri'), {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,
-    }))
+    })
 
 
     app.get('/', (req, res) => {
