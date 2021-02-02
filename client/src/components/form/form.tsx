@@ -1,9 +1,12 @@
 import React from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Spinner } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { connect } from 'react-redux';
 import { Redirect, useParams } from 'react-router-dom';
 import { AuthorizationStatus } from '../../const';
+import { useHttp } from '../../hooks/http.hook';
+import { MessageToast } from '../message-toast/message-toast';
+import Preloader from '../preloader/preloader';
 
 import './form.css';
 
@@ -30,12 +33,20 @@ const AuthForm: React.FC<IAuthFormProps> = ({ authorizationStatus }) => {
 	}
 
 	const { formType } = useParams<UrlParamTypes>();
+	const { loading, serverError, request } = useHttp();
 	const { register, handleSubmit, errors } = useForm();
 
-	const onSubmit = (data: FormDataTypes) => console.log(data);
+	const onSubmit = async (formData: FormDataTypes) => {
+		try {
+			const data = await request(`/api/auth/${formType}`, 'POST', formData);
+			console.log(data);
+		} catch (e) {}
+	};
 
 	return (
 		<div className="form-container">
+			{serverError && <MessageToast message={`${serverError}`} />}
+
 			<h2>{formType === 'login' ? `Вход в систему` : 'Регистрация'}</h2>
 			<Form className="form" onSubmit={handleSubmit(onSubmit)}>
 				{formType === 'register' && (
@@ -99,9 +110,15 @@ const AuthForm: React.FC<IAuthFormProps> = ({ authorizationStatus }) => {
 					</Form.Group>
 				)}
 
-				<Button variant="primary" type="submit">
-					Submit
-				</Button>
+				<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+					{loading ? (
+						<Spinner animation="grow" />
+					) : (
+						<Button variant="primary" type="submit">
+							Submit
+						</Button>
+					)}
+				</div>
 			</Form>
 		</div>
 	);
@@ -113,11 +130,11 @@ const mapStateToProps = (state: any) => ({
 
 export default connect(mapStateToProps)(AuthForm);
 
-const refRegisterAlerts: IRefRegTypes = {
-	required: 'This is required',
-	minLength: 'Min length exceeded',
-	maxLength: 'Max length exceeded'
-};
+// const refRegisterAlerts: IRefRegTypes = {
+// 	required: 'This is required',
+// 	minLength: 'Min length exceeded',
+// 	maxLength: 'Max length exceeded'
+// };
 
 // const inputFields = [
 // 	{

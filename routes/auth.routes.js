@@ -15,20 +15,20 @@ router.post(
   '/register',
   [
     check('email', 'Некорректный email').isEmail(),
-    check('password', 'Некорректный пароль')
-    .isLength({
+    check('password', 'Некорректный пароль').isLength({
       min: 7,
       max: 16
     }),
-    check('name', 'Некорректное имя')
-    .isLength({
+    check('name', 'Некорректное имя').isLength({
       min: 2,
       max: 30
     })
   ],
   async (req, res) => {
     try {
-      const errors = validationResult();
+      console.log('Body on server: ', req.body);
+
+      const errors = validationResult(req);
 
       if (!errors.isEmpty) {
         return res.status(400).json({
@@ -67,7 +67,7 @@ router.post(
         message: 'Пользователь создан!'
       })
     } catch (error) {
-      res.send(500).json({
+      res.sendStatus(500).json({
         message: 'что-то пошло не так '
       })
     }
@@ -78,17 +78,15 @@ router.post(
   '/login',
   [
     check('email', 'Введите корректный email').normalizeEmail().isEmail(),
-    check('password', 'Введите пароль')
-    .exists(),
-    check('password', 'Введите корректный пароль')
-    .isLength({
+    check('password', 'Введите пароль').exists(),
+    check('password', 'Введите корректный пароль').isLength({
       min: 7,
       max: 16
     }),
   ],
   async (req, res) => {
     try {
-      const errors = validationResult();
+      const errors = validationResult(req);
 
       if (!errors.isEmpty) {
         return res.status(400).json({
