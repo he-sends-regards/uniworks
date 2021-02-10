@@ -63,8 +63,10 @@ router.post(
 
       await newUser.save();
 
-      res.status(201).json({
-        message: 'Пользователь создан!'
+      res.json({
+        message: 'User registered',
+        userName: user.name,
+        userMail: user.email
       })
     } catch (error) {
       res.sendStatus(500).json({
@@ -126,12 +128,14 @@ router.post(
         }
       )
 
-      res.send({
+      res.json({
         token,
-        userId
+        userId: user.id,
+        userName: user.name,
+        userMail: user.email
       })
     } catch (error) {
-      res.send(500).json({
+      res.sendStatus(500).json({
         message: 'что-то пошло не так'
       })
     }
