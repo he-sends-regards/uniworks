@@ -7,9 +7,8 @@ import { AuthorizationStatus } from '../../const';
 import { ActionType } from '../../store/actions';
 
 interface IUserData {
-	name: string;
-	email: string;
-	password: string;
+	userName: string;
+	userMail: string;
 }
 
 interface IAccountProps {
@@ -23,8 +22,6 @@ const Account: React.FC<IAccountProps> = ({ authorizationStatus, currentUser, lo
 		alert('Вы не авторизованы');
 		return <Redirect to="/auth/login" />;
 	}
-
-	const [isPasswordVisible, setPasswordVisible] = useState(false);
 
 	return (
 		<div className="account">
@@ -54,20 +51,9 @@ const Account: React.FC<IAccountProps> = ({ authorizationStatus, currentUser, lo
 					<Col sm={10} className="account__tab-nav_content">
 						<Tab.Content>
 							<Tab.Pane eventKey="n1">
-								Имя: {currentUser.name}
+								Имя: {currentUser.userName}
 								<br />
-								Email: {currentUser.email}
-								<br />
-								Пароль: {isPasswordVisible ? currentUser.password : '******'}
-								<br />
-								<div className="account__tab-nav_password-btns-container">
-									<Button variant="warning" onClick={() => setPasswordVisible(!isPasswordVisible)}>
-										{`${isPasswordVisible ? 'Скрыть' : 'Показать'} пароль`}
-									</Button>
-									<Button variant="success" onClick={() => setPasswordVisible(!isPasswordVisible)}>
-										{`Сменить пароль`}
-									</Button>
-								</div>
+								Email: {currentUser.userMail}
 							</Tab.Pane>
 						</Tab.Content>
 						<Tab.Content>
