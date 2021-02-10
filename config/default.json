@@ -1,5 +1,4 @@
 {
   "port": 5000,
-  "mongoUri": "mongodb+srv://ILutskiy:Take1it1easy@cluster0.ya9ih.mongodb.net/app?retryWrites=true&w=majority",
-  "jwtSecret": "hello freak bitch"
+  "jwtSecret": "uniworks-secret-jwt-demo"
 }
