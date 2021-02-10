@@ -4,16 +4,24 @@ import { useForm } from 'react-hook-form';
 import { connect } from 'react-redux';
 import { Redirect, useParams } from 'react-router-dom';
 import { AuthorizationStatus } from '../../const';
+import { useAuth } from '../../hooks/auth.hook';
 import { useHttp } from '../../hooks/http.hook';
+import { ActionType, switchAuthStatus } from '../../store/actions';
 import { MessageToast } from '../message-toast/message-toast';
 
 import './form.css';
 
-const AuthForm: React.FC<{ authorizationStatus?: 'AUTH' | 'NO_AUTH' }> = ({ authorizationStatus }) => {
+const AuthForm: React.FC<{ authorizationStatus?: 'AUTH' | 'NO_AUTH'; addUser?: any; switchAuthStatus?: any }> = ({
+	authorizationStatus,
+	addUser,
+	switchAuthStatus
+}) => {
 	if (authorizationStatus === AuthorizationStatus.AUTH) {
 		alert('Вы авторизованы');
 		return <Redirect to="/account" />;
 	}
+
+	const auth = useAuth();
 
 	const { formType } = useParams<{ formType: string }>();
 	const { loading, serverError, request } = useHttp();
@@ -22,7 +30,10 @@ const AuthForm: React.FC<{ authorizationStatus?: 'AUTH' | 'NO_AUTH' }> = ({ auth
 	const onSubmit = async (formData: { [key: string]: string }) => {
 		try {
 			const data = await request(`/api/auth/${formType}`, 'POST', formData);
-			console.log(data);
+
+			auth.login(data.token, data.userId, data.userName, data.userMail);
+			addUser(data);
+			switchAuthStatus();
 		} catch (e) {}
 	};
 
@@ -111,4 +122,9 @@ const mapStateToProps = (state: any) => ({
 	authorizationStatus: state.authorizationStatus
 });
 
-export default connect(mapStateToProps)(AuthForm);
+const mapDispatchToProps = (dispatch: any) => ({
+	addUser: (data: object) => dispatch({ type: ActionType.REGISTER_USER, payload: data }),
+	switchAuthStatus: () => dispatch({ type: ActionType.SWITCH_AUTH_STATUS })
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AuthForm);
