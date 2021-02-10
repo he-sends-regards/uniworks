@@ -14,14 +14,28 @@ import Account from '../account/account';
 import { CLIENT_ROUTES } from '../../routes/routes';
 
 import './App.css';
+import { useAuth } from '../../hooks/auth.hook';
+import store from '../../store/store';
+import { ActionType } from '../../store/actions';
+
+const storageName = 'userData';
 
 const App: React.FC = () => {
 	const [isLoaded, setIsLoaded] = useState(false);
+	const { token, userId, login, logout } = useAuth();
 
 	useEffect(() => {
 		setTimeout(() => {
 			setIsLoaded(true);
 		}, 3000);
+
+		const storageData = JSON.parse(localStorage.getItem(storageName) || '{}');
+
+		if (storageData && storageData.token) {
+			login(storageData.token, storageData.userId, storageData.userName, storageData.userMail);
+			store.dispatch({ type: ActionType.SWITCH_AUTH_STATUS });
+			store.dispatch({ type: ActionType.REGISTER_USER, payload: storageData });
+		}
 	}, []);
 
 	return (
