@@ -21,7 +21,9 @@ const schema = new Schema({
   works: [{
     type: Types.ObjectId,
     ref: 'Work'
-  }]
+  }],
+}, {
+  collection: 'users'
 });
 
 module.exports = model('User', schema);

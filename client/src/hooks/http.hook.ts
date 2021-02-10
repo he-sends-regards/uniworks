@@ -1,10 +1,6 @@
+import { ActionType } from './../store/actions';
 import { useCallback, useState } from 'react';
-
-interface IUseHttpReturn {
-	method: string;
-	body: any;
-	headers: object;
-}
+import store from '../store/store';
 
 export const useHttp = () => {
 	const [loading, setLoading] = useState(false);
@@ -17,7 +13,7 @@ export const useHttp = () => {
 			try {
 				if (body) {
 					body = JSON.stringify(body);
-					headers['Content-Type'] = 'application/json';
+          headers['Content-Type'] = 'application/json';
 				}
 
 				const response = await fetch(url, { method, body, headers });
@@ -29,17 +25,20 @@ export const useHttp = () => {
 
 				setLoading(false);
 
+        store.dispatch({ type: ActionType.REGISTER_USER, payload: data })
+        store.dispatch({type: ActionType.SWITCH_AUTH_STATUS})
+
 				return data;
 			} catch (err) {
 				setLoading(false);
 				setServerError(err.message);
 				throw err;
 			}
-		},
+    },
 		[]
 	);
 
-	const clearError = () => setServerError(null);
+	const clearError = useCallback(() => setServerError(null), [])
 
 	return {
 		loading,

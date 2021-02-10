@@ -2,6 +2,7 @@ const express = require('express');
 const config = require('config');
 const mongoose = require('mongoose');
 const router = require('./routes/auth.routes.js');
+const User = require('./models/User.js');
 
 const app = express();
 
@@ -14,12 +15,12 @@ const PORT = config.get('port') // process.env.PORT ?? 5000;
 
 async function start() {
   try {
-    await mongoose.connect(config.get('mongoUri'), {
+    await mongoose.connect('mongodb://localhost:27017/', {
+      dbName: 'test',
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,
     })
-
 
     app.get('/', (req, res) => {
       res.send('<h1>hello express js</h1>')
