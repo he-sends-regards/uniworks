@@ -5,6 +5,7 @@ import { Tab, Row, Col, Nav, Button } from 'react-bootstrap';
 import './account.css';
 import { AuthorizationStatus } from '../../const';
 import { ActionType } from '../../store/actions';
+import { useAuth } from '../../hooks/auth.hook';
 
 interface IUserData {
 	userName: string;
@@ -14,14 +15,16 @@ interface IUserData {
 interface IAccountProps {
 	authorizationStatus?: 'AUTH' | 'NO_AUTH';
 	currentUser: IUserData;
-	logout?: any;
+	storeLogout?: any;
 }
 
-const Account: React.FC<IAccountProps> = ({ authorizationStatus, currentUser, logout }) => {
+const Account: React.FC<IAccountProps> = ({ authorizationStatus, currentUser, storeLogout }) => {
 	if (authorizationStatus === AuthorizationStatus.NO_AUTH) {
 		alert('Вы не авторизованы');
 		return <Redirect to="/auth/login" />;
 	}
+
+	const auth = useAuth();
 
 	return (
 		<div className="account">
@@ -40,7 +43,8 @@ const Account: React.FC<IAccountProps> = ({ authorizationStatus, currentUser, lo
 								className="account__tab-nav_logout-btn"
 								variant="danger"
 								onClick={() => {
-									logout();
+									storeLogout();
+									auth.logout();
 									return <Redirect to="/auth/login" />;
 								}}
 							>
@@ -72,7 +76,7 @@ const mapStateToProps = (state: any) => ({
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-	logout: () => dispatch({ type: ActionType.LOGOUT })
+	storeLogout: () => dispatch({ type: ActionType.LOGOUT })
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Account);

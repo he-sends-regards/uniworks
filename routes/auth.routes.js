@@ -65,8 +65,8 @@ router.post(
 
       res.json({
         message: 'User registered',
-        userName: user.name,
-        userMail: user.email
+        userName: newUser.name,
+        userMail: newUser.email,
       })
     } catch (error) {
       res.sendStatus(500).json({

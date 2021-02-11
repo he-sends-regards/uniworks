@@ -25,9 +25,6 @@ export const useHttp = () => {
 
 				setLoading(false);
 
-        store.dispatch({ type: ActionType.REGISTER_USER, payload: data })
-        store.dispatch({type: ActionType.SWITCH_AUTH_STATUS})
-
 				return data;
 			} catch (err) {
 				setLoading(false);
